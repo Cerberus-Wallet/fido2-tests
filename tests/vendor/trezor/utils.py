@@ -43,7 +43,6 @@ def load_client():
         pin=None,
         passphrase_protection=False,
         label="test",
-        language="en-US",
     )
     client.clear_session()
 
