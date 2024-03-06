@@ -8,7 +8,7 @@ import pytest
 from fido2.ctap import CtapError
 from fido2.hid import CAPABILITY, CTAPHID
 
-check_timeouts = 'trezor' in sys.argv
+check_timeouts = 'cerberus' in sys.argv
 
 @pytest.mark.skipif(
     '--nfc' in sys.argv,

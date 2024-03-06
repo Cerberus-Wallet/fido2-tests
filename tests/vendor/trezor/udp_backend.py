@@ -24,16 +24,16 @@ def format_pkg(d, p):
 class HidOverUDP(fido2._pyu2f.base.HidDevice):
     @staticmethod
     def Enumerate():
-        TREZOR_FIDO2_UDP_PORT = os.getenv("TREZOR_FIDO2_UDP_PORT", default="21326")
+        CERBERUS_FIDO2_UDP_PORT = os.getenv("CERBERUS_FIDO2_UDP_PORT", default="21326")
         a = [
             {
                 "vendor_id": 0x1209,
                 "product_id": 0x53C1,
-                "product_string": "TREZOR",
+                "product_string": "CERBERUS",
                 "serial_number": "12345678",
                 "usage": 0x01,
                 "usage_page": 0xF1D0,
-                "path": "127.0.0.1:%s" % TREZOR_FIDO2_UDP_PORT,
+                "path": "127.0.0.1:%s" % CERBERUS_FIDO2_UDP_PORT,
             }
         ]
         return a

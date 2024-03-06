@@ -193,7 +193,7 @@ class TestHmacSecret(object):
             device.sendGA(*req.toGA())
         assert e.value.code == CtapError.ERR.INVALID_LENGTH
 
-    @pytest.mark.skipif('trezor' in sys.argv, reason="Trezor does not support get_next_assertion() because it has a display.")
+    @pytest.mark.skipif('cerberus' in sys.argv, reason="Cerberus does not support get_next_assertion() because it has a display.")
     @pytest.mark.parametrize("salts", [(salt1,), (salt1, salt2)])
     def test_get_next_assertion_has_extension(self, device, MCHmacSecret, cipher, sharedSecret, salts, fixed_users):
         """ Check that get_next_assertion properly returns extension information for multiple accounts. """
@@ -239,7 +239,7 @@ class TestHmacSecret(object):
             verify(x, y, req.cdh)
 
 
-@pytest.mark.skipif('trezor' in sys.argv, reason="ClientPin is not supported on Trezor.")
+@pytest.mark.skipif('cerberus' in sys.argv, reason="ClientPin is not supported on Cerberus.")
 class TestHmacSecretUV(object):
     def test_hmac_secret_different_with_uv(self, device, MCHmacSecret, cipher, sharedSecret):
         salts = [salt1]

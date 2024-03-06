@@ -8,7 +8,7 @@ from tests.utils import *
 
 
 @pytest.mark.skipif(
-    ("--sim" in sys.argv or '--nfc' in sys.argv) and not 'trezor' in sys.argv,
+    ("--sim" in sys.argv or '--nfc' in sys.argv) and not 'cerberus' in sys.argv,
     reason="Simulation doesn't care about user presence"
 )
 class TestUserPresence(object):
@@ -34,7 +34,7 @@ class TestUserPresence(object):
                 device.sendGA(*FidoRequest(GARes, timeout=event, on_keepalive=None).toGA())
         assert e.value.code == CtapError.ERR.KEEPALIVE_CANCEL
 
-    @pytest.mark.skipif(not 'trezor' in sys.argv, reason="Only Trezor supports decline.")
+    @pytest.mark.skipif(not 'cerberus' in sys.argv, reason="Only Cerberus supports decline.")
     def test_user_decline(self, device, MCRes, GARes):
         print("PRESS DECLINE")
         with pytest.raises(CtapError) as e:

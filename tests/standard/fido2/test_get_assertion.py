@@ -85,7 +85,7 @@ class TestGetAssertion(object):
     def test_unknown_option(self, device, GARes):
         device.sendGA(*FidoRequest(GARes, options={"unknown": True}).toGA())
 
-    @pytest.mark.skipif('trezor' in sys.argv, reason="User verification flag is intentionally set to true on Trezor even when user verification is not configured. (Otherwise some services refuse registration without giving a reason.)")
+    @pytest.mark.skipif('cerberus' in sys.argv, reason="User verification flag is intentionally set to true on Cerberus even when user verification is not configured. (Otherwise some services refuse registration without giving a reason.)")
     def test_option_uv(self, device, info, GARes):
         if "uv" in info.options:
             if info.options["uv"]:
@@ -151,14 +151,14 @@ class TestGetAssertion(object):
         try:
             verify(MCRes, res, GARes.request.cdh)
         except InvalidSignature:
-            if 'trezor' not in sys.argv:
+            if 'cerberus' not in sys.argv:
                 raise
 
         if '--nfc' not in sys.argv:
             assert((res.auth_data.flags & 1) == 0)
 
 
-@pytest.mark.skipif('trezor' in sys.argv, reason="Reboot is not supported on Trezor.")
+@pytest.mark.skipif('cerberus' in sys.argv, reason="Reboot is not supported on Cerberus.")
 class TestGetAssertionAfterBoot(object):
     def test_assertion_after_reboot(self, rebootedDevice, MCRes, GARes):
         credential_data = AttestedCredentialData(MCRes.auth_data.credential_data)

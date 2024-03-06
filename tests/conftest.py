@@ -13,8 +13,8 @@ from fido2.utils import hmac_sha256, sha256
 
 from tests.utils import *
 
-if 'trezor' in sys.argv:
-    from .vendor.trezor.udp_backend import force_udp_backend
+if 'cerberus' in sys.argv:
+    from .vendor.cerberus.udp_backend import force_udp_backend
 else:
     from solo.fido2 import force_udp_backend
 

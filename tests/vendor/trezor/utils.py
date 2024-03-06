@@ -9,7 +9,7 @@ from trezorlib.transport import enumerate_devices, get_transport
 
 
 def get_device():
-    path = os.environ.get("TREZOR_PATH")
+    path = os.environ.get("CERBERUS_PATH")
     interact = os.environ.get("INTERACT") == "1"
     if path:
         try:
@@ -33,8 +33,8 @@ def load_client():
     try:
         client = get_device()
     except RuntimeError:
-        request.session.shouldstop = "No debuggable Trezor is available"
-        pytest.fail("No debuggable Trezor is available")
+        request.session.shouldstop = "No debuggable Cerberus is available"
+        pytest.fail("No debuggable Cerberus is available")
 
     wipe_device(client)
     debuglink.load_device_by_mnemonic(
@@ -50,7 +50,7 @@ def load_client():
     return client
 
 
-TREZOR_CLIENT = load_client()
+CERBERUS_CLIENT = load_client()
 
 
 class DeviceSelectCredential:
@@ -62,8 +62,8 @@ class DeviceSelectCredential:
             return
 
         if self.number == 0:
-            TREZOR_CLIENT.debug.press_no()
+            CERBERUS_CLIENT.debug.press_no()
         else:
             for _ in range(self.number - 1):
-                TREZOR_CLIENT.debug.swipe_left()
-            TREZOR_CLIENT.debug.press_yes()
+                CERBERUS_CLIENT.debug.swipe_left()
+            CERBERUS_CLIENT.debug.press_yes()
