@@ -2,10 +2,10 @@ import os
 import socket
 from fido2.ctap import STATUS
 
-from trezorlib import debuglink
-from trezorlib.debuglink import TrezorClientDebugLink
-from trezorlib.device import wipe as wipe_device
-from trezorlib.transport import enumerate_devices, get_transport
+from cerberuslib import debuglink
+from cerberuslib.debuglink import CerberusClientDebugLink
+from cerberuslib.device import wipe as wipe_device
+from cerberuslib.transport import enumerate_devices, get_transport
 
 
 def get_device():
@@ -14,7 +14,7 @@ def get_device():
     if path:
         try:
             transport = get_transport(path)
-            return TrezorClientDebugLink(transport, auto_interact=not interact)
+            return CerberusClientDebugLink(transport, auto_interact=not interact)
         except Exception as e:
             raise RuntimeError("Failed to open debuglink for {}".format(path)) from e
 
@@ -22,7 +22,7 @@ def get_device():
         devices = enumerate_devices()
         for device in devices:
             try:
-                return TrezorClientDebugLink(device, auto_interact=not interact)
+                return CerberusClientDebugLink(device, auto_interact=not interact)
             except Exception:
                 pass
         else:
