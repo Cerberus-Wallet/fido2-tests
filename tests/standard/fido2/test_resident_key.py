@@ -62,7 +62,7 @@ class TestResidentKey(object):
         else:
             assert MC_RK_Res.request.user == GA_RK_Res.user
 
-    @pytest.mark.skipif('trezor' in sys.argv, reason="Trezor does not support get_next_assertion() because it has a display.")
+    @pytest.mark.skipif('cerberus' in sys.argv, reason="Cerberus does not support get_next_assertion() because it has a display.")
     def test_multiple_rk_nodisplay(self, device, MC_RK_Res):
         auths = []
         regs = [MC_RK_Res]
@@ -96,7 +96,7 @@ class TestResidentKey(object):
         for x, y in zip(regs, auths[::-1]):
             verify(x, y, req.cdh)
 
-    @pytest.mark.skipif('trezor' not in sys.argv, reason="Only Trezor has a display.")
+    @pytest.mark.skipif('cerberus' not in sys.argv, reason="Only Cerberus has a display.")
     def test_multiple_rk_display(self, device, MC_RK_Res):
         regs = [MC_RK_Res]
         for i in range(0, 3):
@@ -117,7 +117,7 @@ class TestResidentKey(object):
             assert res.user["id"] == reg.request.user["id"]
             verify(reg, res, req.cdh)
 
-    @pytest.mark.skipif('trezor' not in sys.argv, reason="Only Trezor has a display.")
+    @pytest.mark.skipif('cerberus' not in sys.argv, reason="Only Cerberus has a display.")
     def test_replace_rk_display(self, device):
         """
         Test replacing resident keys.
@@ -147,7 +147,7 @@ class TestResidentKey(object):
                 assert res.user["id"] == reg.request.user["id"]
                 verify(reg, res, req.cdh)
 
-    @pytest.mark.skipif('trezor' in sys.argv, reason="Trezor does not support get_next_assertion() because it has a display.")
+    @pytest.mark.skipif('cerberus' in sys.argv, reason="Cerberus does not support get_next_assertion() because it has a display.")
     @pytest.mark.skipif('solokeys' in sys.argv, reason="Initial SoloKeys model truncates displayName")
     def test_rk_maximum_size_nodisplay(self, device, MC_RK_Res):
         """
@@ -175,7 +175,7 @@ class TestResidentKey(object):
             for y in ("name", "icon", "displayName", "id"):
                 assert user_max_GA.user[y] == user_max[y]
 
-    @pytest.mark.skipif('trezor' not in sys.argv, reason="Only Trezor has a display.")
+    @pytest.mark.skipif('cerberus' not in sys.argv, reason="Only Cerberus has a display.")
     def test_rk_maximum_size_display(self, device, MC_RK_Res):
         """
         Check the lengths of the fields according to the FIDO2 spec
@@ -190,7 +190,7 @@ class TestResidentKey(object):
         assert resGA.number_of_credentials is None
         verify(resMC, resGA, req.cdh)
 
-    @pytest.mark.skipif('trezor' in sys.argv, reason="Trezor does not support get_next_assertion() because it has a display.")
+    @pytest.mark.skipif('cerberus' in sys.argv, reason="Cerberus does not support get_next_assertion() because it has a display.")
     @pytest.mark.skipif('solokeys' in sys.argv, reason="Initial SoloKeys model truncates displayName")
     def test_rk_maximum_list_capacity_per_rp_nodisplay(self, device, MC_RK_Res):
         """
@@ -243,7 +243,7 @@ class TestResidentKey(object):
         for x, y in zip(regs, auths):
             verify(x, y, req.cdh)
 
-    @pytest.mark.skipif('trezor' not in sys.argv, reason="Only Trezor has a display.")
+    @pytest.mark.skipif('cerberus' not in sys.argv, reason="Only Cerberus has a display.")
     def test_rk_maximum_list_capacity_per_rp_display(self, device):
         """
         Test maximum capacity of resident keys.

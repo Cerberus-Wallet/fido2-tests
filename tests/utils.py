@@ -8,8 +8,8 @@ from numbers import Number
 from fido2.ctap2 import ES256, AttestedCredentialData, PinProtocolV1
 from fido2.utils import hmac_sha256, sha256
 
-if 'trezor' in sys.argv:
-    from .vendor.trezor.utils import DeviceSelectCredential
+if 'cerberus' in sys.argv:
+    from .vendor.cerberus.utils import DeviceSelectCredential
 else:
     from .vendor.solo.utils import DeviceSelectCredential
 

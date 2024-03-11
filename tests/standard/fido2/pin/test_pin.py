@@ -50,7 +50,7 @@ def GAPinRes(device, MCPinRes):
     return res
 
 
-@pytest.mark.skipif('trezor' in sys.argv, reason="ClientPin is not supported on Trezor.")
+@pytest.mark.skipif('cerberus' in sys.argv, reason="ClientPin is not supported on Cerberus.")
 class TestPin(object):
     def test_pin(self, CPRes):
         pass
@@ -136,7 +136,7 @@ class TestPin(object):
         assert e.value.code == CtapError.ERR.NO_CREDENTIALS
 
 
-@pytest.mark.skipif('trezor' in sys.argv, reason="ClientPin is not supported on Trezor.")
+@pytest.mark.skipif('cerberus' in sys.argv, reason="ClientPin is not supported on Cerberus.")
 def test_pin_attempts(device, SetPinRes):
     # Flip 1 bit
     pin = SetPinRes.PIN

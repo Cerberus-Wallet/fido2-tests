@@ -27,7 +27,7 @@ class TestMakeCredential(object):
         resp = device.sendMC(*req.toMC())
         assert resp.auth_data.credential_data.public_key[3] == ES256.ALGORITHM
 
-    @pytest.mark.skipif('trezor' not in sys.argv, reason="Only Trezor supports EdDSA.")
+    @pytest.mark.skipif('cerberus' not in sys.argv, reason="Only Cerberus supports EdDSA.")
     def test_multiple_key_params_eddsa(self, device, MCRes):
         key_params = [
             {"type": "public-key", "alg": EdDSA.ALGORITHM},
